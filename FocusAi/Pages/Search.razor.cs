@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FocusAi.Pages
 {
@@ -14,6 +15,7 @@ namespace FocusAi.Pages
 
         private string TokenId { get; set; } = string.Empty;
         public bool isLoading { get; set; }
+        public bool isError { get; set; } = false;
         private List<string> messages { get; set; }
         public TradingStrategy displayedMessage { get; set; } = new TradingStrategy();
         public required List<TradingStrategy> tradingStrategies { get; set; }
@@ -54,22 +56,47 @@ namespace FocusAi.Pages
 
         public void Messageclear()
         {
-            displayedMessage = null;
+            isError = false;
+
         }
 
         public async Task SearchToken()
         {
-            //displayedMessage = null;
-            isLoading = true;
-            await Task.Delay(2000);
-            if (!MemoryCache.TryGetValue(TokenId, out TradingStrategy cachedMessage))
+
+            if (TokenId.Length > 20 || TokenId.Length < 20)
             {
-                cachedMessage = GetRandomMessage();
-                MemoryCache.Set(TokenId, cachedMessage);
+                isError = true;
             }
-            displayedMessage = cachedMessage;
-            isLoading = false;
+            else
+            {
+                isLoading = true;
+                await Task.Delay(2000);
+                isError = false;
+                isLoading = false;
+                if (!MemoryCache.TryGetValue(TokenId, out TradingStrategy cachedMessage))
+                {
+                    cachedMessage = GetRandomMessage();
+                    MemoryCache.Set(TokenId, cachedMessage);
+                    displayedMessage = cachedMessage;
+                }
+            }
+
+
         }
+
+        //public async Task SearchToken()
+        //{
+        //    //displayedMessage = null;
+        //    isLoading = true;
+        //    await Task.Delay(2000);
+        //    if (!MemoryCache.TryGetValue(TokenId, out TradingStrategy cachedMessage))
+        //    {
+        //        cachedMessage = GetRandomMessage();
+        //        MemoryCache.Set(TokenId, cachedMessage);
+        //    }
+        //    displayedMessage = cachedMessage;
+        //    isLoading = false;
+        //}
 
         public async Task GoBack()
         {
