@@ -1,0 +1,113 @@
+﻿@page "/intro"
+@using Microsoft.AspNetCore.Components.Web
+
+<!-- Header -->
+<header class="header">
+    <img src="logo.png" alt="Focus AI Logo">
+    <span>Focus AI</span>
+</header>
+
+<!-- Sticky Navigation -->
+<nav>
+    <a @onclick="ScrollToWhyFocus" class="nav-link">Why Focus AI</a>
+    <a @onclick="ScrollToHowItWorks" class="nav-link">How It Works</a>
+    <a @onclick="ScrollToProof" class="nav-link">Proof</a>
+    <a @onclick="ScrollToFAQ" class="nav-link">FAQ</a>
+</nav>
+
+<!-- Main Content -->
+<main>
+    <h1>Welcome to Focus AI</h1>
+    <p>
+        Focus AI, an advanced trading bot, achieved a 67.9% success rate in meme coin predictions during its pilot,
+        leveraging market trends, social sentiment, and data analytics. It offers strategies such as momentum reversal,
+        breakout opportunities, trend continuation, and support bounces, with risk-to-reward ratios as high as 18:1.
+        While highly precise, it assists rather than guarantees outcomes, leaving users responsible for trading decisions.
+    </p>
+    <NavLink href="/search" class="cta-button">Get Started</NavLink>
+</main>
+
+<!-- Why Focus Section -->
+<section id="why-focus" class="why-focus">
+    <h2>Why Choose Focus AI?</h2>
+    <div class="features">
+        <div class="feature">
+            <h3>Advanced AI Algorithms</h3>
+            <p>Focus AI utilizes state-of-the-art machine learning models to predict market trends with exceptional accuracy.</p>
+        </div>
+        <div class="feature">
+            <h3>Real-Time Insights</h3>
+            <p>Get actionable trading insights powered by real-time data analysis and trend evaluation.</p>
+        </div>
+        <div class="feature">
+            <h3>Beginner-Friendly</h3>
+            <p>Focus AI is designed to be intuitive and user-friendly, catering to both novice and experienced traders.</p>
+        </div>
+        <div class="feature">
+            <h3>High Success Rate</h3>
+            <p>Achieve greater trading success with Focus AI's proven track record of 67.9% prediction accuracy.</p>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+        <div class="step">
+            <h3>Data Collection</h3>
+            <p>Focus AI gathers market data, social media sentiment, and historical trends in real-time.</p>
+        </div>
+        <div class="step">
+            <h3>AI Analysis</h3>
+            <p>Our cutting-edge algorithms process the data to identify high-probability trading opportunities.</p>
+        </div>
+        <div class="step">
+            <h3>Actionable Insights</h3>
+            <p>Receive easy-to-understand insights that help you make smarter trading decisions.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Proof Section -->
+<section id="proof" class="proof">
+    <h2>Proof of Technology</h2>
+    <p style="text-align: center; color: #cccccc;">Below is an example of the complex AI trading logic that powers Focus AI:</p>
+    <div class="proof-code" style="display: flex; justify-content: center; margin-top: 20px;">
+    <pre style="background-color: #222222; color: #00FF00; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); max-width: 80%; overflow-x: auto;">
+        def ai_trading_strategy(data):
+            signals = []
+            for token in data['tokens']:
+                momentum = calculate_momentum(token['prices'])
+                if momentum &gt; threshold:
+                    signals.append({&#x27;token&#x27;: token[&#x27;name&#x27;], &#x27;action&#x27;: &#x27;BUY&#x27;, &#x27;confidence&#x27;: momentum})
+                elif momentum &lt; -threshold:
+                    signals.append({&#x27;token&#x27;: token[&#x27;name&#x27;], &#x27;action&#x27;: &#x27;SELL&#x27;, &#x27;confidence&#x27;: abs(momentum)})
+            return signals
+
+        data = fetch_market_data()
+        trading_signals = ai_trading_strategy(data)
+        print(trading_signals)
+    </pre>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="Fa-Questions" class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item" @onclick="ToggleFAQ">
+        <h3>What is Focus AI?</h3>
+        <p class="faq-answer">Focus AI is a revolutionary trading bot that leverages cutting-edge technology...</p>
+    </div>
+    <div class="faq-item" @onclick="ToggleFAQ">
+        <h3>How does Focus AI predict market trends?</h3>
+        <p class="faq-answer">Focus AI uses proprietary algorithms to evaluate millions of data points...</p>
+    </div>
+    <!-- Additional FAQ Items -->
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Focus AI. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+</footer>
+
