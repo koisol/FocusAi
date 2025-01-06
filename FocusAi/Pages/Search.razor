@@ -2,38 +2,51 @@
 @using Microsoft.AspNetCore.Components.Web
 @inject NavigationManager NavigationManager
 
-<!-- Header -->
-<search-header>
-    <img src="images\logo.png" alt="Focus AI Logo">
-</search-header>
+<!-- Body -->
+<div class="search-body">
+    <!-- Header -->
+    <search-header>
+        <img src="images/logo.png" alt="Focus AI Logo">
+    </search-header>
 
-<!-- Chat Container -->
-<div class="chat-container">
-    <div class="chat-info">
-        Enter a token ID below to access comprehensive market predictions, including precise entry and exit points.
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <div class="chat-info">
+            Enter a token ID below to access comprehensive market predictions, including precise entry and exit points.
+        </div>
+        <div class="chat-input">
+            <input @bind="TokenId" type="text" placeholder="Enter token ID here..." />
+            <button @onclick="SearchToken">Search</button>
     </div>
-    <div class="chat-input">
-        <input @bind="TokenId" type="text" placeholder="Enter token ID here..." />
-        <button @onclick="SearchToken">Search</button>
+    <div class="loading-msg">
+        @if (isLoading)
+        {
+            <p>Please while we process your token...!</p>
+        }
     </div>
 </div>
-
-
+<div>
+    @if (!string.IsNullOrEmpty(displayedMessage))
+    {
+        <div class="message">
+            <p>@displayedMessage</p>
+        </div>
+    }
+</div>
 
 <!-- Back Button -->
 <div style="margin: 20px; text-align: center;">
     <button @onclick="GoBack" style="
-        padding: 12px 30px;
-        background: linear-gradient(90deg, #007bff, #0056b3); /* Gradient Background */
-        color: white;
-        font-size: 1em;
-        font-weight: bold;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        transition: transform 0.2s, box-shadow 0.2s;
-        ">
+            padding: 12px 30px;
+            background: linear-gradient(90deg, #007bff, #0056b3); /* Gradient Background */
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;">
         &#8592; Back
     </button>
 </div>
@@ -42,7 +55,4 @@
 <search-footer>
     <p>&copy; 2025 Focus AI. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
 </search-footer>
-
-
-
-
+</div>
