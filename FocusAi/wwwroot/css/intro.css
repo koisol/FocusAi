@@ -36,8 +36,8 @@ body {
 
 header {
     width: 100%;
-    background-color: #000000; /* Black Background for Logo */
-    padding: 20px;
+    background-color: black; /* Black Background for Logo */
+   /* padding: 20px;*/
     text-align: center;
     display: flex;
     align-items: center;
@@ -45,8 +45,8 @@ header {
 }
 
     header img {
-        height: 40px;
-        margin-right: 10px;
+        height: 150px;
+        /*margin-right: 10px;*/
     }
 
     header span {
