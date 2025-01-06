@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\search.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\Search.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.19" PrivateAssets="all" />
   </ItemGroup>
@@ -16,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\search.css" />
     <None Include="wwwroot\js\general.js" />
     <None Include="wwwroot\css\intro.css" />
   </ItemGroup>
