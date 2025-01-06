@@ -17,7 +17,7 @@
             Enter a token ID below to access comprehensive market predictions, including precise entry and exit points.
         </div>
         <div class="chat-input">
-            <input @bind="TokenId" type="text" placeholder="Enter token ID here..." />
+            <input @bind="TokenId" type="text" placeholder="Enter token ID here..."  maxlength="20"/>
             <button @onclick="SearchToken">Search</button>
     </div>
     <div class="loading-msg">
