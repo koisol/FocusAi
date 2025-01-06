@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\css\search.css" />
     <None Include="wwwroot\js\general.js" />
     <None Include="wwwroot\css\intro.css" />

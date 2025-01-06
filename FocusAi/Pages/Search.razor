@@ -3,7 +3,7 @@
 @inject NavigationManager NavigationManager
 
 <!-- Body -->
-<div class="search-body">
+<div class="search-body" style="margin-bottom:20px">
     <!-- Header -->
     <search-header>
         <img src="images/logo.png" alt="Focus AI Logo">
@@ -25,14 +25,20 @@
         }
     </div>
 </div>
-<div>
-    @if (!string.IsNullOrEmpty(displayedMessage))
-    {
-        <div class="message">
-            <p>@displayedMessage</p>
+@if (!string.IsNullOrEmpty(displayedMessage.Title))
+{
+    <div class="card-container">
+        <div class="card">
+            <h4>@displayedMessage.Title</h4> @foreach (var entry in displayedMessage.EntryPoints)
+            {
+                <p>@entry</p>
+            }
         </div>
-    }
-</div>
+    </div>
+}
+
+
+   
 
 <!-- Back Button -->
 <div style="margin: 20px; text-align: center;">

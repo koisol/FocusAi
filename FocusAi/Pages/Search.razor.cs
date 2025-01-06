@@ -1,16 +1,23 @@
+using FocusAi.Models;
+using FocusAi.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Caching.Memory;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Metrics;
 
 namespace FocusAi.Pages
 {
-   
+
     public partial class Search : ComponentBase
     {
 
         private string TokenId { get; set; } = string.Empty;
         public bool isLoading { get; set; }
         private List<string> messages { get; set; }
-        private string displayedMessage = string.Empty;
+        public TradingStrategy displayedMessage { get; set; } = new TradingStrategy();
+        public required List<TradingStrategy> tradingStrategies { get; set; }
+
 
         [Inject]
         private IMemoryCache MemoryCache { get; set; }
@@ -19,30 +26,43 @@ namespace FocusAi.Pages
         {
             if (firstRender)
             {
-                
+
                 loadScenarios();
             }
 
 
         }
 
-        private string GetRandomMessage()
+        private TradingStrategy GetRandomMessage()
         {
             Random random = new Random();
-            int index = random.Next(messages.Count); return messages[index];
+            int index = random.Next(tradingStrategies.Count);
+
+            var entryPointIndex = random.Next(tradingStrategies[index].EntryPoints.Count);
+
+            TradingStrategy ts = new TradingStrategy()
+            {
+                Title = tradingStrategies[index].Title,
+                EntryPoints = new List<string>()
+                {
+                    tradingStrategies[index].EntryPoints[entryPointIndex].ToString()
+                }
+            };
+
+            return ts;
         }
 
         public void Messageclear()
         {
-            displayedMessage = string.Empty;
+            displayedMessage = null;
         }
 
         public async Task SearchToken()
         {
-            displayedMessage = string.Empty;
+            //displayedMessage = null;
             isLoading = true;
             await Task.Delay(2000);
-            if (!MemoryCache.TryGetValue(TokenId, out string cachedMessage))
+            if (!MemoryCache.TryGetValue(TokenId, out TradingStrategy cachedMessage))
             {
                 cachedMessage = GetRandomMessage();
                 MemoryCache.Set(TokenId, cachedMessage);
@@ -58,19 +78,133 @@ namespace FocusAi.Pages
 
         private void loadScenarios()
         {
-            messages = new List<string>()
+            tradingStrategies = new List<TradingStrategy>
             {
-            "Entry Point: Price drops 15%. Take Profit: 110%. Stop Loss: 8%. RRR: 13.75:1. AI expects a swift reversal driven by oversold signals and mean reversion.",
-            "Entry Point: Price increases by 5% beyond a key resistance. Take Profit: 85%. Stop Loss: 5%. RRR: 17:1. Advanced AI detects a high-probability breakout supported by increasing volume.",
-            "Entry Point: Price retraces by 12% in an uptrend. Take Profit: 150%. Stop Loss: 10%. RRR: 15:1. AI predicts a continuation based on historical trend analysis and momentum indicators.",
-            "Entry Point: Price declines 8% during a low-volatility squeeze. Take Profit: 95%. Stop Loss: 6%. RRR: 15.83:1. The system anticipates a breakout after volatility expansion.",
-            "Entry Point: Price touches a historical support level after a 10% drop. Take Profit: 120%. Stop Loss: 7%. RRR: 17.14:1. AI identifies strong confluence at support for a high-probability bounce.",
-            "Entry Point: Price drops 6% due to negative news. Take Profit: 75%. Stop Loss: 3%. RRR: 25:1. AI identifies the dip as an overreaction with potential for recovery as sentiment stabilises.",
-            "Entry Point: Price retraces 4% after breaking a key resistance. Take Profit: 70%. Stop Loss: 4%. RRR: 17.5:1. AI suggests the retest offers an ideal entry for continuation.",
-            "Entry Point: Price declines 14% to form a double bottom. Take Profit: 130%. Stop Loss: 9%. RRR: 14.44:1. AI confirms a strong reversal pattern backed by volume divergence.",
-            "Entry Point: Price drops 10% to close a previous gap. Take Profit: 100%. Stop Loss: 8%. RRR: 12.5:1. AI predicts high probability for a reversal after the gap fills.",
-            "Entry Point: Price deviates 20% from its mean value (moving average). Take Profit: 150%. Stop Loss: 12%. RRR: 12.5:1."
+                new TradingStrategy
+                {
+                Title = "Momentum Reversal",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price drops 10%. Take Profit: 100%. Stop Loss: 8%. Risk-to-Reward Ratio: 12.5:1. AI anticipates a quick recovery from oversold levels.",
+                        "Entry: Price drops 12%. Take Profit: 115%. Stop Loss: 9%. Risk-to-Reward Ratio: 12.78:1. AI signals reversal from key technical levels.",
+                        "Entry: Price drops 15%. Take Profit: 120%. Stop Loss: 10%. Risk-to-Reward Ratio: 12:1. AI detects strong recovery potential.",
+                        "Entry: Price drops 8%. Take Profit: 85%. Stop Loss: 6%. Risk-to-Reward Ratio: 14.17:1. AI foresees mean reversion.",
+                        "Entry: Price drops 20%. Take Profit: 150%. Stop Loss: 12%. Risk-to-Reward Ratio: 12.5:1. AI predicts a sharp bounce."
+                    }
+                },
+                 new TradingStrategy
+                {
+                    Title = "Breakout Opportunity",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price rises 5% above resistance. Take Profit: 85%. Stop Loss: 5%. Risk-to-Reward Ratio: 17:1. AI detects strong breakout momentum.",
+                        "Entry: Price rises 7% above resistance. Take Profit: 100%. Stop Loss: 7%. Risk-to-Reward Ratio: 14.29:1. AI flags a continuation breakout.",
+                        "Entry: Price rises 10%. Take Profit: 125%. Stop Loss: 9%. Risk-to-Reward Ratio: 13.89:1. AI highlights extended breakout potential.",
+                        "Entry: Price rises 3%. Take Profit: 50%. Stop Loss: 3%. Risk-to-Reward Ratio: 16.67:1. AI identifies low-risk breakout opportunity.",
+                        "Entry: Price rises 6%. Take Profit: 70%. Stop Loss: 4%. Risk-to-Reward Ratio: 17.5:1. AI suggests breakout consolidation."
+                    }
+                },
+                new TradingStrategy
+                {
+                    Title = "Trend Continuation",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price retraces 12%. Take Profit: 150%. Stop Loss: 10%. Risk-to-Reward Ratio: 15:1. AI predicts continuation of an uptrend.",
+                        "Entry: Price retraces 8%. Take Profit: 110%. Stop Loss: 7%. Risk-to-Reward Ratio: 15.71:1. AI sees pullback opportunity in trend.",
+                        "Entry: Price retraces 6%. Take Profit: 75%. Stop Loss: 4%. Risk-to-Reward Ratio: 18.75:1. AI identifies trend momentum resuming.",
+                        "Entry: Price retraces 10%. Take Profit: 120%. Stop Loss: 8%. Risk-to-Reward Ratio: 15:1. AI highlights potential for higher highs.",
+                        "Entry: Price retraces 15%. Take Profit: 200%. Stop Loss: 12%. Risk-to-Reward Ratio: 16.67:1. AI foresees a strong continuation rally."
+                    }
+                },
+                new TradingStrategy
+                {
+                    Title = "Volatility Compression",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price drops 6%. Take Profit: 75%. Stop Loss: 4%. Risk-to-Reward Ratio: 18.75:1. AI predicts volatility expansion post-squeeze.",
+                        "Entry: Price drops 8%. Take Profit: 85%. Stop Loss: 5%. Risk-to-Reward Ratio: 17:1. AI signals upcoming breakout after compression.",
+                        "Entry: Price drops 10%. Take Profit: 100%. Stop Loss: 6%. Risk-to-Reward Ratio: 16.67:1. AI highlights tight consolidation leading to movement.",
+                        "Entry: Price drops 15%. Take Profit: 150%. Stop Loss: 10%. Risk-to-Reward Ratio: 15:1. AI expects a sharp price breakout.",
+                        "Entry: Price drops 12%. Take Profit: 140%. Stop Loss: 9%. Risk-to-Reward Ratio: 15.56:1. AI identifies breakout from a compressed range."
+                    }
+                },
+                new TradingStrategy
+                {
+                    Title = "Support Bounce",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price drops 10%. Take Profit: 120%. Stop Loss: 8%. Risk-to-Reward Ratio: 15:1. AI detects bounce off strong support.",
+                        "Entry: Price drops 8%. Take Profit: 85%. Stop Loss: 5%. Risk-to-Reward Ratio: 17:1. AI confirms support level holding.",
+                        "Entry: Price drops 12%. Take Profit: 140%. Stop Loss: 9%. Risk-to-Reward Ratio: 15.56:1. AI flags rebound opportunity at support.",
+                        "Entry: Price drops 6%. Take Profit: 70%. Stop Loss: 4%. Risk-to-Reward Ratio: 17.5:1. AI highlights low-risk bounce play.",
+                        "Entry: Price drops 14%. Take Profit: 160%. Stop Loss: 10%. Risk-to-Reward Ratio: 16:1. AI sees significant upside from support."
+                    }
+                },
+                new TradingStrategy
+                {
+                    Title = "News Catalyst",
+                    EntryPoints = new List<string>
+                    {
+                      "Entry: Price drops 6%. Take Profit: 75%. Stop Loss: 3%. Risk-to-Reward Ratio: 25:1. AI identifies overreaction to negative news.",
+                      "Entry: Price drops 8%. Take Profit: 95%. Stop Loss: 5%. Risk-to-Reward Ratio: 19:1. AI anticipates recovery as sentiment stabilises.",
+                      "Entry: Price drops 10%. Take Profit: 120%. Stop Loss: 8%. Risk-to-Reward Ratio: 15:1. AI highlights market recovery potential.",
+                      "Entry: Price drops 5%. Take Profit: 65%. Stop Loss: 4%. Risk-to-Reward Ratio: 16.25:1. AI signals short-term recovery.",
+                      "Entry: Price drops 12%. Take Profit: 140%. Stop Loss: 9%. Risk-to-Reward Ratio: 15.56:1. AI foresees sentiment reversal."
+                    }
+                },
+                new TradingStrategy
+                {
+                    Title = "Breakout Retest",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price retraces 4%. Take Profit: 65%. Stop Loss: 3%. Risk-to-Reward Ratio: 21.67:1. AI confirms breakout retest for low-risk entry.",
+                        "Entry: Price retraces 7%. Take Profit: 90%. Stop Loss: 6%. Risk-to-Reward Ratio: 15:1. AI identifies retest holding support.",
+                        "Entry: Price retraces 6%. Take Profit: 80%. Stop Loss: 5%. Risk-to-Reward Ratio: 16:1. AI signals breakout continuation.",
+                        "Entry: Price retraces 10%. Take Profit: 120%. Stop Loss: 8%. Risk-to-Reward Ratio: 15:1. AI detects a strong breakout setup.",
+                        "Entry: Price retraces 12%. Take Profit: 140%. Stop Loss: 9%. Risk-to-Reward Ratio: 15.56:1. AI highlights retest for extended gains."
+                    }
+                },
+                new TradingStrategy
+                {
+                    Title = "Double Bottom Formation",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price drops 14%. Take Profit: 130%. Stop Loss: 9%. Risk-to-Reward Ratio: 14.44:1. AI confirms bullish reversal.",
+                        "Entry: Price drops 12%. Take Profit: 120%. Stop Loss: 8%. Risk-to-Reward Ratio: 15:1. AI signals recovery from double bottom.",
+                        "Entry: Price drops 10%. Take Profit: 100%. Stop Loss: 6%. Risk-to-Reward Ratio: 16.67:1. AI detects classic double bottom.",
+                        "Entry: Price drops 8%. Take Profit: 85%. Stop Loss: 5%. Risk-to-Reward Ratio: 17:1. AI highlights smaller reversal.",
+                        "Entry: Price drops 15%. Take Profit: 150%. Stop Loss: 10%. Risk-to-Reward Ratio: 15:1. AI expects strong recovery."
+                    }
+                },
+                new TradingStrategy
+                {
+                    Title = "Gap Fill Trade",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price drops 10%. Take Profit: 100%. Stop Loss: 8%. Risk-to-Reward Ratio: 12.5:1. AI identifies opportunity post-gap closure.",
+                        "Entry: Price drops 8%. Take Profit: 85%. Stop Loss: 6%. Risk-to-Reward Ratio: 14.17:1. AI highlights immediate recovery potential.",
+                        "Entry: Price drops 12%. Take Profit: 120%. Stop Loss: 9%. Risk-to-Reward Ratio: 13.33:1. AI expects reversal after gap fills.",
+                        "Entry: Price drops 15%. Take Profit: 150%. Stop Loss: 12%. Risk-to-Reward Ratio: 12.5:1. AI anticipates recovery post-gap.",
+                        "Entry: Price drops 6%. Take Profit: 75%. Stop Loss: 4%. Risk-to-Reward Ratio: 18.75:1. AI flags gap closure."
+                    }
+                },
+                 new TradingStrategy
+                {
+                    Title = "Mean Reversion",
+                    EntryPoints = new List<string>
+                    {
+                        "Entry: Price deviates 20% from mean. Take Profit: 150%. Stop Loss: 12%. Risk-to-Reward Ratio: 12.5:1. AI detects strong reversion.",
+                        "Entry: Price deviates 15% from mean. Take Profit: 120%. Stop Loss: 9%. Risk-to-Reward Ratio: 13.33:1. AI predicts quick mean alignment.",
+                        "Entry: Price deviates 12% from mean. Take Profit: 100%. Stop Loss: 8%. Risk-to-Reward Ratio: 12.5:1. AI flags reversion opportunity.",
+                        "Entry: Price deviates 10% from mean. Take Profit: 85%. Stop Loss: 6%. Risk-to-Reward Ratio: 14.17:1. AI sees smaller reversion potential.",
+                        "Entry: Price deviates 8% from mean. Take Profit: 75%. Stop Loss: 5%. Risk-to-Reward Ratio: 15:1. AI anticipates minor reversion."
+                    }
+                 }
             };
         }
     }
 }
+
+
+
+    
