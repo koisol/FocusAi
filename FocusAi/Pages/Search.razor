@@ -17,7 +17,7 @@
             Enter a token ID below to access comprehensive market predictions, including precise entry and exit points.
         </div>
         <div class="chat-input">
-            <input @bind="TokenId" @onfocus="Messageclear" type="text" placeholder="Enter token ID here..." maxlength="20" />
+            <input @bind="TokenId" @onfocus="Messageclear" type="text" placeholder="Enter token ID here..."  />
             <button @onclick="SearchToken">Search</button>
     </div>
     <div class="loading-msg">
@@ -29,7 +29,7 @@
     <div class="loading-msg">
         @if (isError)
         {
-            <p>Invalid Token Id please input correct token id</p>
+            <p>Invalid token ID please input correct token ID</p>
         }
     </div>
 </div>

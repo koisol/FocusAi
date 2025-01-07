@@ -31,7 +31,7 @@ search-header {
 /* Chat Container */
 .chat-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@ search-footer {
     color: #ffffff;
     margin: 10px;
     padding: 20px;
-    width: 560px;
+    width: 620px;
 }
 
     .card h4 {

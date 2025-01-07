@@ -5,11 +5,25 @@
     scroll-behavior: smooth;
 }
 
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #1a1a1a; /* Dark Grey Background */
     color: #ffffff; /* White Text */
+}
+
+/* Initial state: invisible and moved down */
+#animated-paragraph {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Final state: fully visible and in place */
+#animated-paragraph.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 
@@ -251,3 +265,4 @@ footer {
         footer a:hover {
             text-decoration: underline;
         }
+

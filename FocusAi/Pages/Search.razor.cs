@@ -1,11 +1,7 @@
 using FocusAi.Models;
-using FocusAi.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Metrics;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Solnet.Wallet;
 
 namespace FocusAi.Pages
 {
@@ -24,11 +20,11 @@ namespace FocusAi.Pages
         [Inject]
         private IMemoryCache MemoryCache { get; set; }
 
+
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-
                 loadScenarios();
             }
 
@@ -62,12 +58,9 @@ namespace FocusAi.Pages
 
         public async Task SearchToken()
         {
-            
-            if (TokenId.Length > 20 || TokenId.Length < 20)
-            {
-                isError = true;
-            }
-            else
+
+            var isValidToken = PublicKey.IsValid(TokenId);
+            if (isValidToken)
             {
                 displayedMessage = new TradingStrategy();
                 isLoading = true;
@@ -81,6 +74,10 @@ namespace FocusAi.Pages
                 }
                 displayedMessage = cachedMessage;
                 isLoading = false;
+            }
+            else
+            {
+                isError = true;
             }
 
 
