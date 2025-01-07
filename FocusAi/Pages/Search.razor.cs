@@ -62,23 +62,25 @@ namespace FocusAi.Pages
 
         public async Task SearchToken()
         {
-
+            
             if (TokenId.Length > 20 || TokenId.Length < 20)
             {
                 isError = true;
             }
             else
             {
+                displayedMessage = new TradingStrategy();
                 isLoading = true;
                 await Task.Delay(2000);
                 isError = false;
-                isLoading = false;
+               
                 if (!MemoryCache.TryGetValue(TokenId, out TradingStrategy cachedMessage))
                 {
                     cachedMessage = GetRandomMessage();
-                    MemoryCache.Set(TokenId, cachedMessage);
-                    displayedMessage = cachedMessage;
+                    MemoryCache.Set(TokenId, cachedMessage); 
                 }
+                displayedMessage = cachedMessage;
+                isLoading = false;
             }
 
 
