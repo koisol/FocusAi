@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\koiso\source\repos\FocusAi\FocusAi\bin\Release\net7.0\browser-wasm\publish\</_PublishTargetUrl>
+    <History>True|2025-01-07T00:57:46.4207476Z||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
