@@ -2,21 +2,50 @@
 @using Microsoft.AspNetCore.Components.Web
 
 <!-- Header -->
-<header class="header">
+@* <header class="header">
     <img src="images\logo.png" alt="Focus AI Logo">
-</header>
+</header> *@
 
 <!-- Sticky Navigation -->
-<nav>
+@* <nav>
     <a @onclick="ScrollToWhyFocus" class="nav-link">Why Focus AI</a>
     <a @onclick="ScrollToHowItWorks" class="nav-link">How It Works</a>
     <a @onclick="ScrollToProof" class="nav-link">Proof</a>
     <a @onclick="ScrollToFAQ" class="nav-link">FAQ</a>
+</nav> *@
+
+<nav class="sticky-navbar">
+    <div class="navbar-container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images\logo.png" alt="Focus AI Logo">
+        </div>
+
+      
+        <div class="welcome-msg">Welcome to Focus AI</div>
+        
+
+        <!-- Menu Items -->
+        <ul class="menu">
+            <li class="menu-item">
+                <a @onclick="ScrollToWhyFocus" class="nav-link">Why Focus AI</a>
+            </li>
+            <li class="menu-item">
+                <a @onclick="ScrollToHowItWorks" class="nav-link">How It Works</a>
+            </li>
+            <li class="menu-item">
+                <a @onclick="ScrollToProof" class="nav-link">Proof</a>
+            </li>
+            <li class="menu-item">
+                <a @onclick="ScrollToFAQ" class="nav-link">FAQ</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <!-- Main Content -->
 <main id="animated-paragraph">
-    <h1>Welcome to Focus AI</h1>
+   @*  <h1>Welcome to Focus AI</h1> *@
     <p>
         Focus AI, an advanced trading bot, achieved a 67.9% success rate in meme coin predictions during its pilot,
         leveraging market trends, social sentiment, and data analytics. It offers strategies such as momentum reversal,
