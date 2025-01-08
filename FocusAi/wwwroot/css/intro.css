@@ -78,8 +78,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(255, 174, 0, 0.5);
+    border-radius: 10px;
     color: #ffffff;
+    height: 80px; /* Fixed height */
 }
 
 .navbar-container {
@@ -94,14 +96,9 @@ body {
 .logo {
 }
     .logo img {
-        height: 100px;
-        margin-right: 150px;
+        max-height: 200px; /* Scales the logo within the navbar height */
+        max-width: auto; /* Proportional width */
     }
-
-.welcome-msg {
-    font-size: 2em;
-    
-}
 
 /* Menu */
 .menu {
@@ -113,13 +110,13 @@ body {
 
 .menu-item {
     margin: 0 15px;
-    /*padding-right:16px;*/
 
 }
 
 .nav-link {
     text-decoration: none;
-    color: #ffffff;
+    /*color: #ffffff;*/
+    color:rgb(255,174,0);
     font-size: 20px;
     cursor: pointer;
 
@@ -157,10 +154,10 @@ main {
     padding: 20px;
 }
 
-/*h1 {
+h1 {
     font-size: 2em;
     margin-bottom: 20px;
-}*/
+}
 
 p {
     font-size: 1.2em;
@@ -171,7 +168,8 @@ p {
 .cta-button {
     display: inline-block;
     padding: 15px 30px;
-    background: linear-gradient(90deg, #007bff, #0056b3);
+    /*    background: linear-gradient(90deg, #007bff, #0056b3);*/
+    background: rgb(255,174,0);
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -183,11 +181,15 @@ p {
 
     .cta-button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 6px 10px rgba(255, 174, 0, 0.5);
+       /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);*/
     }
 
 section {
+    margin-top: 20px;
     padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(255, 174, 0, 0.5);
 }
 
     section h2 {
@@ -200,6 +202,7 @@ section {
 .faq-section {
     background-color: #111111;
     padding: 50px 20px;
+
 }
 
 .faq-item {
@@ -208,13 +211,15 @@ section {
     padding: 20px;
     background-color: #222222;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
+    box-shadow: 0 4px 6px rgba(255, 174, 0, 0.5);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
     .faq-item h3 {
         font-size: 1.3em;
-        color: #007bff;
+        /*color: #007bff;*/
+        color: rgb(255,174,0);
         cursor: pointer;
         margin-bottom: 10px;
     }
@@ -256,7 +261,8 @@ section {
         border-radius: 10px;
         padding: 20px;
         width: 280px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /*      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
+        box-shadow: 0 4px 6px rgba(255, 174, 0, 0.5);
         transition: transform 0.3s, box-shadow 0.3s;
     }
 
@@ -267,7 +273,8 @@ section {
 
         .why-focus .feature h3 {
             font-size: 1.3em;
-            color: #007bff;
+            /*color: #007bff;*/
+            color: rgb(255,174,0);
             margin-bottom: 10px;
         }
 
@@ -291,7 +298,8 @@ section {
     border-radius: 10px;
     padding: 20px;
     width: 280px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
+    box-shadow: 0 4px 6px rgba(255, 174, 0, 0.5);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -302,7 +310,8 @@ section {
 
     .how-it-works .step h3 {
         font-size: 1.3em;
-        color: #007bff;
+        /*color: #007bff;*/
+        color:rgb(255,174,0);
         margin-bottom: 10px;
     }
 
@@ -313,14 +322,18 @@ section {
     }
 
 footer {
+    margin-top:20px;
     background-color: #111111;
     padding: 40px 20px;
     color: #cccccc;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(255, 174, 0, 0.5);
+    border-radius: 10px;
 }
 
     footer a {
-        color: #007bff;
+        /*color: #007bff;*/
+        color: rgb(255,174,0);
         text-decoration: none;
     }
 
