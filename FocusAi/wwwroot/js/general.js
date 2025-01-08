@@ -20,12 +20,13 @@ window.oneTwo = function () {
 }
 
 window.typeOutText = function (text) {
-    let index = 0;
-        const interval = setInterval(() => {
-            document.querySelector("#proof .proof-code pre").innerText += text[index];
-            index++;
-            if (index >= text.length) {
-                clearInterval(interval);
-            }
-        }, 20); // Adjust the typing speed by changing the interval (milliseconds)
+    let index = 0; const interval = setInterval(() => {
+        const preElement = document.querySelector("#proof .proof-code pre");
+        if (preElement) {
+            preElement.innerText += text[index];
+        }
+        index++; if (index >= text.length) {
+            clearInterval(interval);
+        }
+    }, 20);
 }

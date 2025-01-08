@@ -15,7 +15,7 @@ namespace FocusAi.Pages
             {
                 await Task.Delay(500); // Optional delay
                 await JS.InvokeVoidAsync("oneTwo");
-                //await TypeText();
+                await TypeText();
             }
         }
 
