@@ -35,9 +35,9 @@ search-header {
     margin: 20px auto;
     display: flex;
     flex-direction: column;
-    background-color: #333333; /* Darker Background */
+    background-color: #111111; /* Darker Background */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(255, 174, 0, 0.5);
     overflow: hidden;
 }
 
@@ -45,7 +45,7 @@ search-header {
     display: flex;
     align-items: center;
     padding: 15px;
-    background-color: #444444; /* Chat Input Background */
+    background-color: #333333; /* Chat Input Background */
 }
 
     .chat-input input {
@@ -62,7 +62,8 @@ search-header {
 
     .chat-input button {
         padding: 12px 25px;
-        background: linear-gradient(90deg, #007bff, #0056b3); /* Gradient Background */
+        /*background: linear-gradient(90deg, #007bff, #0056b3);*/ /* Gradient Background */
+        background: linear-gradient(90deg, rgb(255, 174, 0), rgb(204, 139, 0));
         color: white;
         border: none;
         border-radius: 25px;
@@ -98,7 +99,7 @@ search-footer {
 }
 
     search-footer a {
-        color: #007bff;
+        color: rgb(255, 174,0);
         text-decoration: none;
     }
 
@@ -116,7 +117,7 @@ search-footer {
 .card {
     background-color: #333333;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(255, 174, 0, 0.5);
     color: #ffffff;
     margin: 10px;
     padding: 20px;
@@ -124,7 +125,7 @@ search-footer {
 }
 
     .card h4 {
-        color: #007bff;
+        color: rgb(255, 174,0);
         font-size: 1.5em;
         margin-bottom: 15px;
     }

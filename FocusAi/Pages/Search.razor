@@ -2,9 +2,27 @@
 @using Microsoft.AspNetCore.Components.Web
 @inject NavigationManager NavigationManager
 
-<search-header>
+@* <search-header>
     <img src="images/logo.png" alt="Focus AI Logo">
-</search-header>
+</search-header> *@
+
+<nav class="sticky-navbar">
+    <div class="navbar-container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images\transparent_logo.png" alt="Focus AI Logo">
+        </div>
+
+
+        <!-- Menu Items -->
+        <ul class="menu">
+            <li class="menu-item">
+                <a @onclick="GoBack" class="nav-link">Home</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 
 <!-- Body -->
 <div class="search-body" style="margin-bottom:20px">
@@ -52,7 +70,7 @@
 <div style="margin: 20px; text-align: center;">
     <button @onclick="GoBack" style="
             padding: 12px 30px;
-            background: linear-gradient(90deg, #007bff, #0056b3); /* Gradient Background */
+            background: linear-gradient(90deg, rgb(255, 174, 0), rgb(204, 139, 0));
             color: white;
             font-size: 1em;
             font-weight: bold;
