@@ -30,3 +30,18 @@ window.typeOutText = function (text) {
         }
     }, 20);
 }
+
+window.typeOutMessage = function (message) {
+    let index = 0;
+    const interval = setInterval(() => {
+        const pElement = document.querySelector("#msg-container .card p");
+        if (pElement) {
+            // Add text one character at a time, ensuring it wraps
+            pElement.textContent += message[index];
+        }
+        index++;
+        if (index >= message.length) {
+            clearInterval(interval); // Stop the interval when all characters are added
+        }
+    }, 20); // Adjust typing speed here
+};

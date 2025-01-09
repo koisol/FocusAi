@@ -1,7 +1,9 @@
 using FocusAi.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.JSInterop;
 using Solnet.Wallet;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FocusAi.Pages
 {
@@ -16,7 +18,8 @@ namespace FocusAi.Pages
         public TradingStrategy displayedMessage { get; set; } = new TradingStrategy();
         public required List<TradingStrategy> tradingStrategies { get; set; }
 
-
+        [Inject]
+        private IJSRuntime JS { get; set; } = default!;
         [Inject]
         private IMemoryCache MemoryCache { get; set; }
 
@@ -73,6 +76,9 @@ namespace FocusAi.Pages
                     MemoryCache.Set(TokenId, cachedMessage); 
                 }
                 displayedMessage = cachedMessage;
+                string messsage = displayedMessage.EntryPoints.FirstOrDefault().ToString();
+                await JS.InvokeVoidAsync("typeOutMessage", messsage);
+
                 isLoading = false;
             }
             else

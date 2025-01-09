@@ -2,10 +2,6 @@
 @using Microsoft.AspNetCore.Components.Web
 @inject NavigationManager NavigationManager
 
-@* <search-header>
-    <img src="images/logo.png" alt="Focus AI Logo">
-</search-header> *@
-
 <nav class="sticky-navbar">
     <div class="navbar-container">
         <!-- Logo -->
@@ -18,6 +14,12 @@
         <ul class="menu">
             <li class="menu-item">
                 <a @onclick="GoBack" class="nav-link">Home</a>
+            </li>
+            <li class="menu-item">
+                <a href="https://X.com" class="nav-link">X.com</a>
+            </li>
+            <li class="menu-item">
+                <a href="https://dexscreener.com/" class="nav-link">Dex Screener</a>
             </li>
         </ul>
     </div>
@@ -53,12 +55,11 @@
 </div>
 @if (!string.IsNullOrEmpty(displayedMessage.Title))
 {
-    <div class="card-container">
+    <div id="msg-container" class="card-container">
         <div class="card">
-            <h4>@displayedMessage.Title</h4> @foreach (var entry in displayedMessage.EntryPoints)
-            {
-                <p>@entry</p>
-            }
+            <h4>@displayedMessage.Title</h4>
+                <p></p>
+                
         </div>
     </div>
 }
